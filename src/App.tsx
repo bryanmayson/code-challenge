@@ -7,6 +7,7 @@ import { ErrorBoundaryDisplay } from "./_components/ErrorBoundaryDisplay";
 import { SiteFooter } from "./_components/SiteFooter";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SitePage } from "./_components/SitePage";
+import { LoadingDisplay } from "./_components/LoadingDisplay";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +16,7 @@ export const App: React.FC = () => {
     <ErrorBoundary fallback={<ErrorBoundaryDisplay />}>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <Suspense fallback={"Loading"}>
+          <Suspense fallback={<LoadingDisplay />}>
             <SiteHeader />
             <SitePage>
               <Routes>
