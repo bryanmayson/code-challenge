@@ -11,6 +11,7 @@
 - E2E Testing: Vitest + JSDom + React Testing Library
 
 ## Getting Started
+
 -  `yarn install`
 
 ## Running Locally
@@ -24,5 +25,5 @@
 ## Testing & Coverage
 - To execute available test cases: `yarn test`
 - To execute testcases once & code coverage: `yarn coverage`. Additional further details regarding code coverage can be accessed from the generated `coverage/index.html` after execture the CLI command.
-- Test & Coverage Report: <br> <img width="720" alt="Screenshot 2025-03-13 at 01 00 38" src="https://github.com/user-attachments/assets/489a5c80-e24f-4ee2-9747-ccc4c4788504" />
+- Test & Coverage Report: <br> <img width="720" alt="Screenshot 2025-03-13 at 01 00 38" src="https://github.com/user-attachments/assets/489a5c80-e24f-4ee2-9747-ccc4c4788504" /> <br> <img width="731" alt="Screenshot 2025-03-13 at 01 19 00" src="https://github.com/user-attachments/assets/562f5f90-06a5-4839-9ca9-c25aedd1e5a9" />
 
