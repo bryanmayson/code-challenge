@@ -1,54 +1,28 @@
-# React + TypeScript + Vite
+# Frontend Code Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technical Specifications
+- Node Version: v18.19.0
+- Yarn Package Manager Version: 1.22.18
+- React 19
+- State Management: React Query + React Context
+- Form State Management: React Hook Form + Zodd
+- Bundling: Vite
+- UI Component: Shadcn
+- E2E Testing: Vitest + JSDom + React Testing Library
 
-Currently, two official plugins are available:
+## Getting Started
+-  `yarn install`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running Locally
+- `yarn dev`
+- Access http://localhost:5174/
 
-## Expanding the ESLint configuration
+## Building for Production
+- `yarn build`
+- To preview built assets can be performed via `yarn preview`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Testing & Coverage
+- To execute available test cases: `yarn test`
+- To execute testcases once & code coverage: `yarn coverage`. Additional further details regarding code coverage can be accessed from the generated `coverage/index.html` after execture the CLI command.
+- Test & Coverage Report: <br> <img width="720" alt="Screenshot 2025-03-13 at 01 00 38" src="https://github.com/user-attachments/assets/489a5c80-e24f-4ee2-9747-ccc4c4788504" />
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
