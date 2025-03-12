@@ -1,5 +1,4 @@
 import * as React from "react"
-import * as LabelPrimitive from "@radix-ui/react-label"
 import { Slot } from "@radix-ui/react-slot"
 import {
   Controller,
@@ -12,7 +11,6 @@ import {
 } from "react-hook-form"
 
 import { cn } from "@/_lib/utils"
-import { Label } from "@/_components/shadcn-ui/label"
 
 const Form = FormProvider
 
@@ -85,23 +83,6 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function FormLabel({
-  className,
-  ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
-  const { error, formItemId } = useFormField()
-
-  return (
-    <Label
-      data-slot="form-label"
-      data-error={!!error}
-      className={cn("data-[error=true]:text-destructive-foreground", className)}
-      htmlFor={formItemId}
-      {...props}
-    />
-  )
-}
-
 function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
 
@@ -157,7 +138,6 @@ export {
   useFormField,
   Form,
   FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
   FormMessage,
