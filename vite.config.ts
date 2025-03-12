@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import path from "path"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from 'vite'
@@ -11,4 +12,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/_tests/setup.ts',
+  }
 })

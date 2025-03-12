@@ -19,8 +19,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/_lib/utils";
 import { useInviteModalContext } from "./_context/InviteModalProvider";
 import { InviteModalState } from "./types";
-import { usePostRequestInvite } from "@/landing/_api/usePostNewBooking";
+import { usePostRequestInvite } from "@/landing/_api/usePostRequestInvite";
 import { AxiosError } from "axios";
+import { TID_LANDING_PAGE } from "@/_tests/testIds";
 
 const InviteFormSchema = z
   .object({
@@ -68,7 +69,7 @@ const InviteForm: React.FC = () => {
       email: values.email,
     }).then(() => {
       setModalState(InviteModalState.SUCCESS);
-    });
+    }).catch(() => {})
   };
 
   const axiosError = error as AxiosError<{ errorMessage: string }>;
@@ -126,7 +127,12 @@ const InviteForm: React.FC = () => {
         </Button>
 
         {errorMessage && (
-          <div className='text-sm text-destructive'>{errorMessage}</div>
+          <div
+            data-testid={TID_LANDING_PAGE.INVITE_SERVER_ERR}
+            className='text-sm text-destructive'
+          >
+            {errorMessage}
+          </div>
         )}
       </form>
     </Form>
@@ -140,7 +146,10 @@ export const InviteFormDialog: React.FC = () => {
 
   return (
     <Dialog open={showDialog} onOpenChange={() => setModalState(undefined)}>
-      <DialogContent className='sm:max-w-[425px] p-10'>
+      <DialogContent
+        data-testid={TID_LANDING_PAGE.INVITE_FORM}
+        className='sm:max-w-[425px] p-10'
+      >
         <DialogHeader>
           <DialogTitle className='text-center italic'>
             Request an Invite

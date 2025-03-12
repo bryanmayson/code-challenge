@@ -8,6 +8,7 @@ import { useInviteModalContext } from "./_context/InviteModalProvider";
 import { InviteModalState } from "./types";
 import { Button } from "@/_components/shadcn-ui/button";
 import { cn } from "@/_lib/utils";
+import { TID_LANDING_PAGE } from "@/_tests/testIds";
 
 export const InviteSuccessDialog: React.FC = () => {
   const { modalState, setModalState } = useInviteModalContext();
@@ -16,7 +17,10 @@ export const InviteSuccessDialog: React.FC = () => {
 
   return (
     <Dialog open={showDialog} onOpenChange={() => setModalState(undefined)}>
-      <DialogContent className='md:max-w-md p-10'>
+      <DialogContent
+        data-testid={TID_LANDING_PAGE.INVITE_SUCCESS}
+        className='md:max-w-md p-10'
+      >
         <DialogHeader>
           <DialogTitle className='text-center italic'>All Done</DialogTitle>
           <div className='border-b-1 w-14 mx-auto mt-2' />
@@ -28,6 +32,7 @@ export const InviteSuccessDialog: React.FC = () => {
         <Button
           className={cn("w-full cursor-pointer p-6 mt-4", "md:p-4")}
           onClick={() => setModalState(undefined)}
+          type="button"
         >
           OK
         </Button>
