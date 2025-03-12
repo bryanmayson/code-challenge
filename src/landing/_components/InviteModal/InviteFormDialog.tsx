@@ -6,11 +6,21 @@ import {
   FormMessage,
   Form,
 } from "@/_components/shadcn-ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/_components/shadcn-ui/dialog";
 import { Input } from "@/_components/shadcn-ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/_lib/utils";
+import { useInviteModalContext } from "./_context/InviteModalProvider";
+import { InviteModalState } from "./types";
+import { usePostRequestInvite } from "@/landing/_api/usePostNewBooking";
+import { AxiosError } from "axios";
 
 const InviteFormSchema = z
   .object({
@@ -37,7 +47,10 @@ const InviteFormSchema = z
 
 type FormState = z.infer<typeof InviteFormSchema>;
 
-export const InviteForm: React.FC = () => {
+const InviteForm: React.FC = () => {
+  const { setModalState } = useInviteModalContext();
+  const { mutateAsync, isPending, error } = usePostRequestInvite();
+
   const form = useForm<FormState>({
     resolver: zodResolver(InviteFormSchema),
     mode: "onSubmit",
@@ -50,8 +63,16 @@ export const InviteForm: React.FC = () => {
   });
 
   const onSubmit = async (values: FormState) => {
-    console.log(values);
+    await mutateAsync({
+      name: values.name,
+      email: values.email,
+    }).then(() => {
+      setModalState(InviteModalState.SUCCESS);
+    });
   };
+
+  const axiosError = error as AxiosError<{ errorMessage: string }>;
+  const errorMessage = axiosError?.response?.data.errorMessage || "";
 
   return (
     <Form {...form}>
@@ -98,12 +119,36 @@ export const InviteForm: React.FC = () => {
 
         <Button
           type='submit'
-          variant='outline'
           className={cn("w-full cursor-pointer p-6 mt-4", "md:p-4")}
+          disabled={isPending}
         >
-          Send
+          {isPending ? "Sending, please wait..." : "Send"}
         </Button>
+
+        {errorMessage && (
+          <div className='text-sm text-destructive'>{errorMessage}</div>
+        )}
       </form>
     </Form>
+  );
+};
+
+export const InviteFormDialog: React.FC = () => {
+  const { modalState, setModalState } = useInviteModalContext();
+
+  const showDialog = modalState === InviteModalState.FORM;
+
+  return (
+    <Dialog open={showDialog} onOpenChange={() => setModalState(undefined)}>
+      <DialogContent className='sm:max-w-[425px] p-10'>
+        <DialogHeader>
+          <DialogTitle className='text-center italic'>
+            Request an Invite
+          </DialogTitle>
+          <div className='border-b-1 w-14 mx-auto mt-2' />
+        </DialogHeader>
+        <InviteForm />
+      </DialogContent>
+    </Dialog>
   );
 };

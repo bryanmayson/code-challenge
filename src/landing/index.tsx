@@ -1,5 +1,5 @@
 import { cn } from "@/_lib/utils";
-import { InviteButton } from "./_components/InviteButton";
+import { InviteButton } from "./_components/InviteModal/InviteButton";
 
 const LandingPage: React.FC = () => {
   return (
