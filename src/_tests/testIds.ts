@@ -2,6 +2,7 @@ export const TID_SITE = {
   HEADER: "site-header",
   PAGE: "site-page",
   FOOTER: "site-footer",
+  ERROR_BOUNDARY: 'site-error-boundary'
 };
 
 export const TID_LANDING_PAGE = {
